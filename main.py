@@ -1,9 +1,17 @@
-from transformers import pipeline 
+import warnings
+from transformers import pipeline
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
+# Suppress specific FutureWarnings for clean_up_tokenization_spaces
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def main(text:str):
     # instantiate the classifier
     classifier = pipeline('zero-shot-classification', model='facebook/bart-large-mnli')
+
+    # # set the clean_up_tokenization_spaces in tokenizer
+    # tokenizer = classifier.tokenizer
+    # tokenizer.clean_up_tokenization_spaces = True
 
     # list file options 
     file_labels = ['json', 'csv']
